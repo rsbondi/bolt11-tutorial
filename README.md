@@ -1,1 +1,1 @@
-This section uses the previous 2 sections and adds the actual sequencing through a full payment request and parses it to human readable
+This section uses the previous 2 sections and adds the actual sequencing through a full payment request and parses it to human readable form
