@@ -1,7 +1,8 @@
-This step creates a reader that converts the bech32 5 bit format to normal 8 bit bytes.  The best way to understand why we start here is to look at the [bech32](https://github.com/bitcoin/bips/blob/master/bip-0173.mediawiki#bech32) spec, the table in the link shows how the individual letters that you normally see in a payment request are translated into numbers between 0-31.  We need this so we can take for example a 52 bech32 represetation of a payment hash and convert it to an actual 32 byte hash.
+The "tagged" fields as defined in bolt11 consist of 3 parts
+* `type` (5 bits)
+* `data_length` (10 bits, big-endian)
+* `data` (data_length x 5 bits)
 
-![what it does](five2eight.png)
+In the previous section we added `readWords` function to the reader, that did no transformation of any kind, it just simply returned n amount of 5 bit words as defined by the preceeding `data_length` value.
 
-As you can see, the colors for the 5 bit segments only take a part of the eight bit bytes, so the first byte contains the 5 red from the first segment and 3 green from the second, the reamining 2 green start the second byte etc.
-
-The code in this section sequences through one bit at a time through the 5 bit segments, tracking which segment and which position in the segment and creates the resulting eight bit segments.  The last eight bit segment in the above image has the 3 zeros at the end representing optional padding should you have an imbalance.
+This section will take the n words read and transform them into a human readable format, which is different based on the `type`.  For example, "utf8" will translate to plain readable text while "hex" for payment hash or public key would be a hex string.
