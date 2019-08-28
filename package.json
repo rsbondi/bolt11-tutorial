@@ -1,0 +1,17 @@
+{
+  "name": "bolt11-tutorial",
+  "version": "0.1.0",
+  "description": "step through the process of parsing and encoding bolt11",
+  "main": "index.js",
+  "scripts": {
+    "test": "bmocha --exit"
+  },
+  "author": "Richard Bondi",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rsbondi/bolt11-tutorial"
+  },  "devDependencies": {
+    "bmocha": "^2.1.2"
+  }
+}
