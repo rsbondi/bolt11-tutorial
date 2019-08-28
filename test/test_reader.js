@@ -2,7 +2,7 @@ const WordReader = require("../src/reader")
 const assert = require('assert')
 
 describe('Test reader', () => {
-    it('reader should read int value', function () {
+    it('reader should read int value', () => {
         fivebit = [1, 1, 2] // 000010000100010
         reader = new WordReader(fivebit)
         i = reader.readInt(15)
@@ -19,8 +19,8 @@ describe('Test reader', () => {
         assert.strictEqual(i, 63)
     })
 
-    it('reader should read sequence int values', function () {
-        fivebit = [1, 3, 2] // 000010000100010
+    it('reader should read sequence int values', () => {
+        fivebit = [1, 3, 2] // 000010001100010
         reader = new WordReader(fivebit)
 
         i = reader.readInt(5) // first five 00001
@@ -30,7 +30,7 @@ describe('Test reader', () => {
         assert.strictEqual(i, 98)
    })
 
-    it('reader should read bit values', function () {
+    it('reader should read bit values', () => {
         fivebit = [1, 1, 2, 1, 2] // 00001 00001 00010 00001 00010 -> 00001000 01000100 00010001 (0 dropped)
         reader = new WordReader(fivebit)
         b = reader.read(25, false)
@@ -47,7 +47,7 @@ describe('Test reader', () => {
         assert.deepEqual(b, [8, 68, 17, 128])
     })
 
-    it('reader should read sequence word values', function () {
+    it('reader should read sequence word values', () => {
         fivebit = [1, 2, 3, 4, 5, 6] 
         reader = new WordReader(fivebit)
 
@@ -58,13 +58,13 @@ describe('Test reader', () => {
         assert.deepEqual(w, [3, 4, 5, 6])
    })
 
-   it('reader should read hash value', function () {
+   it('reader should read hash value', () => {
         /*
-                0	1	2	3	4	5	6	7
-        +0	    q	p	z	r	y	9	x	8
-        +8	    g	f	2	t	v	d	w	0
-        +16	    s	3	j	n	5	4	k	h
-        +24	    c	e	6	m	u	a	7	l
+                0    1    2    3    4    5    6    7
+        +0      q    p    z    r    y    9    x    8
+        +8      g    f    2    t    v    d    w    0
+        +16     s    3    j    n    5    4    k    h
+        +24     c    e    6    m    u    a    7    l
         */
     
         // qqqsyqcyq5rqwzqfqqqsyqcyq5rqwzqfqqqsyqcyq5rqwzqfqypq
@@ -77,8 +77,5 @@ describe('Test reader', () => {
         w = reader.read(256)
 
         assert.deepEqual(w, b256)
-
     })
-
-
 })
