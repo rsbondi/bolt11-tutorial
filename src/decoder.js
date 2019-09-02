@@ -8,12 +8,8 @@ function processHex(data, enc) {
 }
 
 function processInt(data) {
-  let val = 0
-  for (let i = 0; i < data.length; i++) {
-    let word = data[i]
-    val += word * Math.pow(32, data.length - i - 1)
-  }
-  return val
+  const reader = new WordReader(data) 
+  return reader.readInt(data.length * 5)
 }
 
 const decodeTagged = {
