@@ -42,8 +42,6 @@ class PaymentRequest {
                 } else this.amount = new big(amt) // no units
             } else this.amount = new big(0)
 
-            this._readBits = 0
-
             this.timestamp = this.reader.readInt(35)
 
             this.tagged = []
@@ -51,7 +49,7 @@ class PaymentRequest {
                 const type = this.reader.readInt(5)
                 const len = this.reader.readInt(10)
                 const data = this.reader.readWords(len)
-                this.tagged.push({ type: decoder[type].label, data: decoder[type] && decoder[type].process(data) || data })
+                this.tagged.push({ type: decoder[type].label, data: decoder[type].process(data) })
 
             }
 
